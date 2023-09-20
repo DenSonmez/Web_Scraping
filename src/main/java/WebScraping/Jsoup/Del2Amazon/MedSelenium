@@ -1,0 +1,43 @@
+System.setProperty("webdriver.chrome.driver", "C:\Users\denso\OneDrive\Skrivebord\CPH\IdeaProjects\Web_Scraping\chromedriver.exe");
+Dette sætter systemegenskaben for Chrome WebDriver, der angiver placeringen af Chromedriver.exe-filen på din computer. Chromedriver er nødvendig for at automatisere interaktionen med Google Chrome-browseren.
+
+WebDriver driver = new ChromeDriver();
+Her initialiseres en instans af Chrome WebDriver, som vil fungere som din webbrowser i koden. Denne driver giver dig mulighed for at åbne websider, interagere med dem og hente deres indhold.
+
+String url = "https://www.amazon.com/s?k=laptop";
+Dette er den URL, der indeholder listen over bærbare computere på Amazon, som du vil skrabe data fra.
+
+List<Product> productList = new ArrayList<>();
+Dette er en tom liste, der vil blive brugt til at gemme produktdataene. Produkterne gemmes i objekter af klassen Product, som antages at være defineret andetsteds i din kode.
+
+try { ... } catch (Exception e) { ... }
+Koden er indkapslet i en try-catch-blok for at håndtere eventuelle undtagelser eller fejl, der kan opstå under kørslen. Dette hjælper med at undgå, at programmet går ned uventet og giver dig mulighed for at identificere og håndtere fejl, hvis de opstår.
+
+driver.get(url);
+Her bruges get-metoden på WebDriver til at besøge Amazon-siden med den angivne URL.
+
+while (true) { ... }
+Dette er en uendelig løkke, der bruges til at hente produktdetaljer fra flere sider ved at skifte til næste side og gentage scraping-processen, indtil der ikke er flere sider tilbage.
+Document doc = Jsoup.parse(driver.getPageSource());
+Dette bruger Jsoup til at analysere og parse HTML-kilden fra den aktuelle webside, som WebDriver har hentet. Dette er nødvendigt for at kunne arbejde med HTML-elementer og udtrække data fra dem.
+
+Elements productElements = doc.select(".s-result-item");
+Dette bruger Jsoup til at vælge alle HTML-elementer med klassen "s-result-item", hvilket sandsynligvis er de elementer, der indeholder produktinformation.
+
+for (Element productElement : productElements) { ... }
+Dette er en for-løkke, der itererer over hvert af de valgte produkt-elementer og udtrækker navnet, prisen og beskrivelsen af hvert produkt.
+
+WebElement nextPageButton = driver.findElement(By.xpath("//li[@class='a-last']/a"));
+Her bruger du WebDriver til at finde det næste sideknapselement ved hjælp af XPath-selector. Dette element bruges til at navigere til den næste side med produkter.
+
+if (nextPageButton.getAttribute("aria-disabled").equals("true")) { ... } else { ... }
+Denne betingelse tjekker, om knappen til den næste side er deaktiveret. Hvis den er deaktiveret, betyder det, at der ikke er flere sider med produkter, og løkken brydes. Hvis den ikke er deaktiveret, klikker du på knappen for at gå til den næste side og fortsætte scraping-processen.
+
+driver.quit();
+Efter scraping-processen afsluttes, afsluttes WebDriver ved at kalde quit()-metoden. Dette lukker browseren og frigiver ressourcer.
+
+saveProductDataToCSV(productList);
+Denne funktion kaldes til sidst for at gemme produktdataene i en CSV-fil. Produktdataene er blevet samlet i productList-listen.
+
+saveProductDataToCSV(List<Product> productList) throws IOException { ... }
+Dette er en hjælpefunktion til at gemme produktdataene i en CSV-fil. Funktionen skriver dataene til en fil med navnet "product_data.txt" og inkluderer en overskriftsrad med kolonnenavne ("Name,Price,Description") og derefter produktdataene i CSV-format.

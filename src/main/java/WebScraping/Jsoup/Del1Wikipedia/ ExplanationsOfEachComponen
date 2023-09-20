@@ -1,0 +1,76 @@
+
+String url = "https://en.wikipedia.org/wiki/Women_in_computing";
+Dette definerer URL'en for den webside, du vil skrabe.
+
+Document document = Jsoup.connect(url).get();:
+Dette bruger Jsoup til at oprette forbindelse til den angivne URL, hente websidens indhold og gemme det som en Document-objekt, som du kan arbejde med.
+
+Elements imgElements = document.select("img");
+ Dette bruger Jsoup til at finde alle HTML <img>-elementer på websiden og gemme dem i en Elements-samling.
+
+Pattern pattern = Pattern.compile("/([^/]+)$");
+Dette definerer et regulært udtryk (regex) mønster ved hjælp af Pattern-klassen.
+Mønsteret matcher sidste del af en sti, der ender med en skråstreg (/), for at udtrække filnavnet.
+
+StringBuilder imageNames = new StringBuilder();
+ Dette opretter en StringBuilder, som du vil bruge til at opbygge en streng med de udtrukne billednavne.
+
+for (Element imgElement : imgElements) {
+: Her starter en for-løkke, der itererer gennem hvert <img>-element på siden.
+
+String imgSrc = imgElement.attr("src");
+: Dette henter værdien af "src" attributten for det aktuelle <img>-element, som indeholder stien til billedfilen.
+
+Matcher matcher = pattern.matcher(imgSrc);
+: Dette bruger det tidligere definerede regex-mønster til at forsøge at matche imgSrc.
+
+if (matcher.find()) {
+: Dette tjekker, om regex-mønsteret matcher imgSrc.
+
+String imageName = matcher.group(1);
+: Dette bruger matcher.group(1) til at hente det matchede filnavn fra gruppe 1 i regex-resultatet.
+
+imageNames.append(imageName).append("\n");
+: Dette tilføjer det matchede filnavn til imageNames med et linjeskift ('\n') efter hvert navn.
+
+System.out.println("Extracted Image Names:");
+: Dette udskriver en overskrift til konsollen for at angive, at de udtrukne billednavne vil blive udskrevet næste.
+
+System.out.println(imageNames.toString().trim());
+: Dette udskriver de udtrukne billednavne fra imageNames, og trim() bruges til at fjerne eventuelle førende eller efterfølgende mellemrum.
+
+String cleanedData = document.text();
+: Dette bruger document.text() til at hente alt tekstinholdet fra hele siden uden HTML-tags og gemmer det som cleanedData.
+
+System.out.println("\nCleaned Data (without HTML tags):");
+: Dette udskriver en overskrift til konsollen for at angive, at det rensede data vil blive udskrevet næste.
+
+System.out.println(cleanedData);
+: Dette udskriver det rensede data til konsollen.
+
+try (FileWriter writer = new FileWriter("output.txt")) {
+: Her starter en try-with-resources-blok, hvor du prøver at åbne en fil ved navn "output.txt" til skrivning.
+
+writer.write(cleanedData);
+: Dette skriver det rensede data til filen.
+
+System.out.println("\nCleaned data is saved in 'output.txt'.");
+: Dette udskriver en meddelelse til konsollen for at informere brugeren om, at det rensede data er gemt i "output.txt".
+
+} catch (IOException e) {
+: Dette fanger eventuelle IOException-undtagelser, der kan opstå under filskrivningsprocessen.
+
+e.printStackTrace();
+: Dette udskriver eventuelle undtagelsesoplysninger til konsollen.
+
+} catch (Exception e) {
+: Dette fanger eventuelle andre undtagelser, der kan opstå under programkørslen.
+
+e.printStackTrace();
+: Dette udskriver eventuelle undtagelsesoplysninger til konsollen.
+
+}
+
+
+
+

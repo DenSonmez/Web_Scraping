@@ -1,0 +1,79 @@
+ [
+    {
+      "firstName": "Miko",
+      "lastName": "Doe",
+      "birthDate": "1990-05-15",
+      "address": {
+        "street": "Hos Far",
+        "city": "Any-town",
+        "zipCode": 2750
+      },
+      "account": {
+        "id": "123456789",
+        "balance": "5000.00",
+        "isActive": false
+      }
+    },
+    {
+      "firstName": "Will",
+      "lastName": "Smith",
+      "birthDate": "1985-08-20",
+      "address": {
+        "street": "New York 5th Ave",
+        "city": "New York",
+        "zipCode": 2000
+      },
+      "account": {
+        "id": "987654321",
+        "balance": "3000.50",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Rasmus",
+      "lastName": "JonJon",
+      "birthDate": "1987-03-10",
+      "address": {
+        "street": "Hos mamy",
+        "city": "Østerbro",
+        "zipCode": "2200"
+      },
+      "account": {
+        "id": "555555555",
+        "balance": "10000.00",
+        "isActive": true
+      }
+    },
+    {
+      "firstName": "Vic",
+      "lastName": "Brown",
+      "birthDate": "1998-11-25",
+      "address": {
+        "street": "the cat 22",
+        "city": "Værløse",
+        "zipCode": 2730
+      },
+      "account": {
+        "id": "111111111",
+        "balance": "7500.25",
+        "isActive": false
+      }
+    },
+    {
+      "firstName": "Marcus",
+      "lastName": "LangBen",
+      "birthDate": "1998-02-05",
+      "address": {
+        "street": "MamaPapa 22",
+        "city": "Helsingør",
+        "zipCode": 3000
+      },
+      "account": {
+        "id": "999999999",
+        "balance": "600.75",
+        "isActive": true
+      }
+    }
+  ]
+
+

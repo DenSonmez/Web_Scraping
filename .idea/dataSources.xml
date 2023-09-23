@@ -8,6 +8,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/trustp</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+<<<<<<< HEAD
     <data-source source="LOCAL" name="movie@localhost" uuid="cf2ecd3d-1195-40d4-a9fe-00c3568e0e8f">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
@@ -22,5 +23,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+=======
+>>>>>>> 0a71350b02e3404c62b1f47a03cba1655e46897b
   </component>
 </project>
